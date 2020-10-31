@@ -1,18 +1,19 @@
-package com.atguigu.gmall.entity;
+package com.atguigu.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 /**
  * <p>
- * 二级分类表
+ * 三级分类表
  * </p>
  *
  * @author wangqiao
@@ -21,9 +22,9 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("base_category2")
-@ApiModel(value="BaseCategory2对象", description="二级分类表")
-public class BaseCategory2 implements Serializable {
+@TableName("base_category3")
+@ApiModel(value="BaseCategory3对象", description="三级分类表")
+public class BaseCategory3 implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,11 +32,11 @@ public class BaseCategory2 implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @ApiModelProperty(value = "二级分类名称")
+    @ApiModelProperty(value = "三级分类名称")
     private String name;
 
-    @ApiModelProperty(value = "一级分类编号")
-    private Long category1Id;
+    @ApiModelProperty(value = "二级分类编号")
+    private Long category2Id;
 
 
 }

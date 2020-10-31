@@ -1,6 +1,6 @@
 package com.atguigu.gmall.service;
 
-import com.atguigu.gmall.entity.BaseCategory3;
+import com.atguigu.entity.BaseCategory3;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -12,5 +12,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2020-10-30
  */
 public interface BaseCategory3Service extends IService<BaseCategory3> {
+
 
 }

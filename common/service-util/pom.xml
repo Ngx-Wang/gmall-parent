@@ -11,14 +11,14 @@
 
     <artifactId>service-util</artifactId>
 
-
-
     <dependencies>
         <dependency>
             <groupId>com.atguigu.gmall</groupId>
             <artifactId>common-util</artifactId>
             <version>1.0</version>
         </dependency>
+
+
 
         <!-- redis -->
         <dependency>
@@ -45,7 +45,6 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
-
 
         <!--mysql-->
         <dependency>

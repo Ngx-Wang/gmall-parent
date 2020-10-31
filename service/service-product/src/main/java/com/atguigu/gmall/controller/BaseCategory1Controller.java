@@ -1,7 +1,8 @@
 package com.atguigu.gmall.controller;
 
 
-import com.atguigu.gmall.entity.BaseCategory1;
+
+import com.atguigu.entity.BaseCategory1;
 import com.atguigu.gmall.service.BaseCategory1Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,6 @@ public class BaseCategory1Controller {
 
     @GetMapping("/getCategory1")
     public Result GetCategory1(){
-
         List<BaseCategory1> category1List = category1Service.list(null);
         return Result.ok(category1List);
 

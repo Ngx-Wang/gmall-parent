@@ -1,6 +1,7 @@
 package com.atguigu.gmall.service.impl;
 
-import com.atguigu.gmall.entity.BaseCategory1;
+
+import com.atguigu.entity.BaseCategory1;
 import com.atguigu.gmall.mapper.BaseCategory1Mapper;
 import com.atguigu.gmall.service.BaseCategory1Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
