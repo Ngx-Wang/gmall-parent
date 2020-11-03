@@ -1,6 +1,7 @@
 package com.atguigu.gmall.service;
 
 import com.atguigu.entity.BaseAttrInfo;
+import com.atguigu.entity.BaseAttrValue;
 import com.atguigu.response.AttrInfoVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -17,4 +18,8 @@ import java.util.List;
 public interface BaseAttrInfoService extends IService<BaseAttrInfo> {
 
     List<AttrInfoVo> attrInfoList(Long category1Id, Long category2Id, Long category3Id);
+
+    void saveAttrInfo(AttrInfoVo attrInfoVo);
+
+    List<BaseAttrValue> getAttrValueList(String attrId);
 }

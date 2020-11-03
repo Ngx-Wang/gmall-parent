@@ -1,6 +1,7 @@
 package com.atguigu.gmall.controller;
 
 
+import com.atguigu.entity.BaseAttrValue;
 import com.atguigu.gmall.service.BaseAttrInfoService;
 import com.atguigu.response.AttrInfoVo;
 import com.atguigu.response.result.Result;
@@ -34,7 +35,18 @@ public class BaseAttrInfoController {
         return Result.ok(attrInfoList);
     }
 
+    @RequestMapping("/saveAttrInfo")
+    public Result saveAttrInfo(@RequestBody AttrInfoVo attrInfoVo){
+        attrInfoService.saveAttrInfo(attrInfoVo);
+        return Result.ok(null);
 
+    }
+
+    @GetMapping("getAttrValueList/{attrId}")
+    public Result getAttrValueList(@PathVariable String attrId){
+        List<BaseAttrValue> attrValueList = attrInfoService.getAttrValueList(attrId);
+        return Result.ok(attrValueList);
+    }
 
 }
 
