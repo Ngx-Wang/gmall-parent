@@ -73,7 +73,7 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoMapper, SpuInfo> impl
             List<SpuSaleAttrValue> saleAttrValueList = spuSaleAttr.getSpuSaleAttrValueList();
             for (SpuSaleAttrValue spuSaleAttrValue : saleAttrValueList) {
                 spuSaleAttrValue.setSaleAttrName(spuSaleAttr.getSaleAttrName());
-                spuSaleAttrValue.setBaseSaleAttrId(spuSaleAttr.getId());
+                spuSaleAttrValue.setBaseSaleAttrId(spuSaleAttr.getBaseSaleAttrId());
                 spuSaleAttrValue.setSpuId(spuInfoId);
                 spuSaleAttrValueMapper.insert(spuSaleAttrValue);
 
