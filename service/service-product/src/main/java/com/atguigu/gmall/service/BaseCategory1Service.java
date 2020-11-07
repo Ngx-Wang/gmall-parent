@@ -1,6 +1,7 @@
 package com.atguigu.gmall.service;
 
 import com.atguigu.entity.BaseCategory1;
+import com.atguigu.entity.BaseCategoryView;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface BaseCategory1Service extends IService<BaseCategory1> {
 
+    BaseCategoryView getCategoryView(Long category3Id);
 }

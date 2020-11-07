@@ -1,9 +1,6 @@
 package com.atguigu.gmall.service;
 
-import com.atguigu.entity.BaseSaleAttr;
-import com.atguigu.entity.BaseTrademark;
-import com.atguigu.entity.SpuImage;
-import com.atguigu.entity.SpuInfo;
+import com.atguigu.entity.*;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -25,4 +22,6 @@ public interface SpuInfoService extends IService<SpuInfo> {
     void saveSpuInfo(SpuInfo spuInfo);
 
     List<SpuImage> spuImageList(String spuId);
+
+    List<SpuSaleAttr> getspuSaleAttrList(Long skuId, Long spuId);
 }

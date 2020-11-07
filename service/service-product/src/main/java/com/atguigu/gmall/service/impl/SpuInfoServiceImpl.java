@@ -92,4 +92,13 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoMapper, SpuInfo> impl
         List<SpuImage> spuImageList = spuImageMapper.selectList(spuImageQueryWrapper);
         return spuImageList;
     }
+
+    @Override
+    public List<SpuSaleAttr> getspuSaleAttrList(Long skuId, Long spuId) {
+        List<SpuSaleAttr> spuSaleAttrs = spuSaleAttrMapper.selectSpuSaleAttrListCheckBySku(skuId,spuId);
+        return  spuSaleAttrs;
+
+
+
+    }
 }

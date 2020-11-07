@@ -24,7 +24,7 @@ public class SkuInfoController {
         IPage<SkuInfo> spuInfoList = skuService.getSpuInfoList(page, limit);
         return Result.ok(spuInfoList);
     }
-    @GetMapping("spuSaleAttrList/{spuId}")
+    @GetMapping("/spuSaleAttrList/{spuId}")
     public Result spuSaleAttrList(@PathVariable("spuId") Long spuId){
         List<SpuSaleAttr>spuSaleAttrList = skuService.spuSaleAttrList(spuId);
         return Result.ok(spuSaleAttrList);
@@ -35,5 +35,19 @@ public class SkuInfoController {
         skuService.saveSkuInfo(skuInfo);
         return Result.ok();
     }
+
+
+    @GetMapping("onSale/{skuId}")
+    public Result skuOnSale(@PathVariable("skuId") Long skuId){
+        skuService.skuOnSale(skuId);
+        return Result.ok();
+    }
+
+    @GetMapping("cancelSale/{skuId}")
+    public Result cancelSale(@PathVariable("skuId") Long skuId){
+        skuService.cancelSale(skuId);
+        return Result.ok();
+    }
+
 
 }

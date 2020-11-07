@@ -1,5 +1,6 @@
 package com.atguigu.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -43,5 +44,9 @@ public class SpuSaleAttrValue implements Serializable {
     @ApiModelProperty(value = "销售属性名称(冗余)")
     private String saleAttrName;
 
-
+    // 是否是默认选中状态
+//	@TableField("sale_attr_name")
+//	String isChecked; 0 未选中，1选中
+    @TableField(exist = false)
+    String isChecked;
 }

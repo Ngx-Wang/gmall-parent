@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 @Service
 public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo> implements SkuInfoService {
@@ -30,8 +31,6 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo> impl
         long page1 = Long.parseLong(page);
         long limit1 = Long.parseLong(limit);
         IPage<SkuInfo> infoPage = new Page<>(page1,limit1);
-
-
         IPage<SkuInfo> skuInfoIPage = baseMapper.selectPage(infoPage, null);
         return skuInfoIPage;
 
@@ -81,6 +80,52 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo> impl
             skuSaleAttrValueMapper.insert(skuSaleAttrValue);
 
         }
+
+    }
+
+    @Override
+    public void skuOnSale(Long skuId) {
+        //更改上架状态
+        SkuInfo skuInfo = new SkuInfo();
+        skuInfo.setId(skuId);
+        skuInfo.setIsSale(1);
+        baseMapper.updateById(skuInfo);
+        //同步搜索引擎
+
+
+
+
+    }
+
+    @Override
+    public void cancelSale(Long skuId) {
+        //更改上架状态
+        SkuInfo skuInfo = new SkuInfo();
+        skuInfo.setId(skuId);
+        skuInfo.setIsSale(0);
+        baseMapper.updateById(skuInfo);
+        //同步搜索引擎
+    }
+
+    @Override
+    public SkuInfo getSkuInfoById(Long skuId) {
+        SkuInfo skuInfo = baseMapper.selectById(skuId);
+        return skuInfo;
+    }
+
+    @Override
+    public BigDecimal getSkuPrice(Long skuId) {
+        SkuInfo skuInfo = baseMapper.selectById(skuId);
+        return skuInfo.getPrice();
+
+    }
+
+    @Override
+    public List<SkuImage> getImage(Long skuId) {
+        QueryWrapper<SkuImage> wrapper = new QueryWrapper<>();
+        wrapper.eq("sku_id",skuId);
+        List<SkuImage> list = skuImageMapper.selectList(wrapper);
+        return list;
 
     }
 }
