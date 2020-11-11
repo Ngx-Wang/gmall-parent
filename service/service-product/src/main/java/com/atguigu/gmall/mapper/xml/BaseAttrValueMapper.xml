@@ -5,4 +5,26 @@
     <select id="getAttrValueByAttrId" resultType="com.atguigu.entity.BaseAttrValue">
         select * from base_attr_value where attr_id=#{id}
     </select>
+    <select id="selectBaseAttrInfoListBySkuId" resultMap="selectBaseAttrInfoListBySkuIdMap">
+     SELECT
+        bai.id,
+        bai.attr_name,
+        bai.category_id,
+        bai.category_level,
+        bav.id attr_value_id,
+        bav.value_name as attr_value,
+        bav.attr_id
+        FROM
+        base_attr_info bai
+        INNER JOIN base_attr_value bav ON bai.id = bav.attr_id
+        INNER JOIN sku_attr_value sav ON sav.value_id = bav.id
+        WHERE
+        sav.sku_id = #{skuId}
+
+    </select>
+
+    <resultMap id="selectBaseAttrInfoListBySkuIdMap" type="com.atguigu.list.SearchAttr" autoMapping="true">
+
+
+    </resultMap>
 </mapper>

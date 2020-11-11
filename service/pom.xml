@@ -6,6 +6,7 @@
         <module>service-test</module>
         <module>service-product</module>
         <module>service-item</module>
+        <module>service-list</module>
     </modules>
 
     <parent>
@@ -24,7 +25,6 @@
             <artifactId>service-util</artifactId>
             <version>1.0</version>
         </dependency>
-
 
         <dependency>
             <groupId>io.github.swagger2markup</groupId>

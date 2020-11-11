@@ -1,6 +1,7 @@
 package com.atguigu.gmall.mapper;
 
 import com.atguigu.entity.BaseAttrValue;
+import com.atguigu.list.SearchAttr;
 import com.atguigu.response.AttrInfoVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -18,4 +19,5 @@ public interface BaseAttrValueMapper extends BaseMapper<BaseAttrValue> {
 
     public List<BaseAttrValue> getAttrValueByAttrId(Integer id);
 
+    List<SearchAttr> selectBaseAttrInfoListBySkuId(Long skuId);
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 
 @Controller
@@ -25,9 +26,13 @@ public class ItemController {
 
     @RequestMapping("{skuId}.html")
     public String index(@PathVariable("skuId") Long skuId, Model model){
+
         // 调用item的接口
         Map<String,Object> map = new HashMap<>();
+        long start = System.currentTimeMillis();
         map = itemFeignClient.getItem(skuId);
+        long end = System.currentTimeMillis();
+        System.out.println("总时间："+(end-start));
         model.addAllAttributes(map);
         return "item/index";
     }

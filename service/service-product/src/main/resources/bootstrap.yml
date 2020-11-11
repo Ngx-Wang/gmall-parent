@@ -17,8 +17,16 @@ spring:
         server-addr: localhost:8848
       config:
         server-addr: localhost:8848
+  redis:
+    host: 192.168.200.128
+    port: 6379
+    database: 0
+
+
+
 mybatis-plus:
   mapper-locations: classpath:com/atguigu/gmall/mapper/xml/*.xml
   configuration:
     map-underscore-to-camel-case: true
+
 

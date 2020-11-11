@@ -1,5 +1,6 @@
 package com.atguigu.gmall.service.impl;
 
+import com.atguigu.gmall.cacheaop.Gmall;
 import com.atguigu.entity.*;
 import com.atguigu.gmall.mapper.*;
 import com.atguigu.gmall.service.SpuInfoService;
@@ -92,7 +93,7 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoMapper, SpuInfo> impl
         List<SpuImage> spuImageList = spuImageMapper.selectList(spuImageQueryWrapper);
         return spuImageList;
     }
-
+    @Gmall(prefix = "spuSaleAttr")
     @Override
     public List<SpuSaleAttr> getspuSaleAttrList(Long skuId, Long spuId) {
         List<SpuSaleAttr> spuSaleAttrs = spuSaleAttrMapper.selectSpuSaleAttrListCheckBySku(skuId,spuId);

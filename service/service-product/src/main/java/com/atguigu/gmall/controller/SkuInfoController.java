@@ -36,13 +36,13 @@ public class SkuInfoController {
         return Result.ok();
     }
 
-
+//上架
     @GetMapping("onSale/{skuId}")
     public Result skuOnSale(@PathVariable("skuId") Long skuId){
         skuService.skuOnSale(skuId);
         return Result.ok();
     }
-
+//下架
     @GetMapping("cancelSale/{skuId}")
     public Result cancelSale(@PathVariable("skuId") Long skuId){
         skuService.cancelSale(skuId);

@@ -1,10 +1,10 @@
 package com.atguigu.gmall.service.impl;
 
 
+import com.atguigu.gmall.cacheaop.Gmall;
 import com.atguigu.entity.BaseCategory1;
 import com.atguigu.entity.BaseCategoryView;
 import com.atguigu.gmall.mapper.BaseCategory1Mapper;
-import com.atguigu.gmall.mapper.BaseCategory3Mapper;
 import com.atguigu.gmall.mapper.BaseCategoryViewMapper;
 import com.atguigu.gmall.service.BaseCategory1Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -25,7 +25,7 @@ public class BaseCategory1ServiceImpl extends ServiceImpl<BaseCategory1Mapper, B
 
     @Autowired
     private BaseCategoryViewMapper categoryViewMapper;
-
+    @Gmall(prefix = "CategoryView")
     @Override
     public BaseCategoryView getCategoryView(Long category3Id) {
         QueryWrapper<BaseCategoryView> wrapper = new QueryWrapper<>();

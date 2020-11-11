@@ -1,4 +1,4 @@
-package com.atguigu.config;
+package com.atguigu.gmall.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
