@@ -35,4 +35,10 @@ public class ListApiController {
         return Result.ok();
     }
 
+    @RequestMapping("/HotSource/{skuId}")
+    Result HotSource(@PathVariable("skuId")Long skuId){
+        listService.HotSource(skuId);
+        return Result.ok();
+    }
+
 }

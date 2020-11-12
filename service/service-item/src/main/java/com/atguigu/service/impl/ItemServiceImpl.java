@@ -1,6 +1,7 @@
 package com.atguigu.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.atguigu.ListFeignClient;
 import com.atguigu.ProductFeignClient;
 import com.atguigu.entity.BaseCategoryView;
 import com.atguigu.entity.SkuImage;
@@ -29,6 +30,9 @@ public class ItemServiceImpl  implements ItemService {
     ProductFeignClient productFeignClient;
     @Resource
     ThreadPoolExecutor threadPoolExecutor;
+
+    @Autowired
+    ListFeignClient listFeignClient;
 
 /*    @Override
     public Map<String, Object> getItem(Long skuId) {
@@ -64,10 +68,10 @@ public class ItemServiceImpl  implements ItemService {
     }*/
     @Override
     public Map<String, Object> getItem(Long skuId) {
-
+        //记录热点值
+        listFeignClient.HotSource(skuId);
+        //显示商品详情，skuInfo
         return getItemByThreadPool(skuId);
-
-
     }
 
     private Map<String, Object> getItemByThreadPool(Long skuId) {
@@ -125,6 +129,11 @@ public class ItemServiceImpl  implements ItemService {
             }
         }, threadPoolExecutor);
         CompletableFuture.allOf(skuInfoCompletableFuture,skuSearAttrValues,categoryView,price,spuSaleAttrList).join();
+
+
+
+
+
 
         long endCurrentTimeMillis = System.currentTimeMillis();
         System.out.println("线程池总耗时："+(endCurrentTimeMillis-startCurrentTimeMillis));

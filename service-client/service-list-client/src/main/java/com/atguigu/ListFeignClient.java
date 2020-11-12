@@ -14,4 +14,6 @@ public interface ListFeignClient {
     @RequestMapping("/list/api/cancelSale/{skuId}")
     Result cancelSale(@PathVariable("skuId")Long skuId);
 
+    @RequestMapping("/list/api/HotSource/{skuId}")
+    Result HotSource(@PathVariable("skuId")Long skuId);
 }

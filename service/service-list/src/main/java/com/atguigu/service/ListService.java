@@ -7,4 +7,5 @@ public interface ListService {
 
     void createGoods();
 
+    void HotSource(Long skuId);
 }
