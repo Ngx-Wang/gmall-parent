@@ -10,6 +10,7 @@ public class SearchParam {
     private Long category1Id;//三级分类id
     private Long category2Id;
     private Long category3Id;
+
     // trademark=2:华为  tmId:tmName
     private String trademark;//品牌
 

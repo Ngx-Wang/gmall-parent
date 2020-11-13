@@ -33,13 +33,9 @@ public class ItemController {
         map = itemFeignClient.getItem(skuId);
         long end = System.currentTimeMillis();
         System.out.println("总时间："+(end-start));
+
         model.addAllAttributes(map);
         return "item/index";
     }
-
-
-
-
-
 
 }

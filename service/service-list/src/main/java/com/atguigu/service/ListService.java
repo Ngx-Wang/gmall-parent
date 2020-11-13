@@ -1,5 +1,8 @@
 package com.atguigu.service;
 
+import com.atguigu.list.SearchParam;
+import com.atguigu.list.SearchResponseVo;
+
 public interface ListService {
     void skuOnSale(Long skuId);
 
@@ -8,4 +11,6 @@ public interface ListService {
     void createGoods();
 
     void HotSource(Long skuId);
+
+    SearchResponseVo SearchList(SearchParam searchParam);
 }

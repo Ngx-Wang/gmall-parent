@@ -1,5 +1,6 @@
 package com.atguigu.gmall.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.atguigu.entity.BaseCategoryView;
 import com.atguigu.entity.SkuImage;
 import com.atguigu.entity.SkuInfo;
@@ -8,10 +9,7 @@ import com.atguigu.gmall.service.*;
 import com.atguigu.list.Goods;
 import com.atguigu.response.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -19,6 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/product/api")
+@CrossOrigin
 public class ProductApiController {
 
     @Autowired
@@ -89,5 +88,11 @@ public class ProductApiController {
         Goods goods =skuService.GetSkuGoods(skuId);
         return goods;
     };
+
+    @RequestMapping("/categoryList")
+    List<JSONObject> categoryList(){
+        List<JSONObject> list = category1Service.categoryList();
+        return list;
+    }
     
 }

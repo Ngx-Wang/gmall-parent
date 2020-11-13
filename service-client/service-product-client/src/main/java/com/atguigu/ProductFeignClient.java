@@ -1,5 +1,6 @@
 package com.atguigu;
 
+import com.alibaba.fastjson.JSONObject;
 import com.atguigu.entity.BaseCategoryView;
 import com.atguigu.entity.SkuImage;
 import com.atguigu.entity.SkuInfo;
@@ -40,4 +41,7 @@ public interface ProductFeignClient {
 
     @RequestMapping("/product/api/GetSkuGoods/{skuId}")
     Goods GetSkuGoods(@PathVariable("skuId")Long skuId);
+
+    @RequestMapping("/product/api/categoryList")
+    List<JSONObject> categoryList();
 }

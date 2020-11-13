@@ -38,7 +38,7 @@ public class Goods {
     private Long tmId;
 
     // 品牌名称
-    @Field(type = FieldType.Keyword)
+    @Field(type =FieldType.Keyword)
     private String tmName;
 
     // 品牌的logo

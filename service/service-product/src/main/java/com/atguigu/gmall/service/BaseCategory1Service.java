@@ -1,8 +1,11 @@
 package com.atguigu.gmall.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.atguigu.entity.BaseCategory1;
 import com.atguigu.entity.BaseCategoryView;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -15,4 +18,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface BaseCategory1Service extends IService<BaseCategory1> {
 
     BaseCategoryView getCategoryView(Long category3Id);
+
+    List<JSONObject> categoryList();
+
 }
