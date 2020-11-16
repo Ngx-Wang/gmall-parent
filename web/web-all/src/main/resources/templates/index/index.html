@@ -31,17 +31,17 @@
 
 							<div th:each="category1,st: ${list}" th:if="${st.index}" th:class="${st.index == 0} ? 'item bo' : 'item'">
 								<h3>
-									<a th:href="@{http://localhost:8300/list.html?category1Id={category1Id}(category1Id=${category1.categoryId})}" th:text="${category1.categoryName}" target="_blank">手机、数码、充值</a>
+									<a th:href="@{http://list.gmall.com/list.html?category1Id={category1Id}(category1Id=${category1.categoryId})}" th:text="${category1.categoryName}" target="_blank">手机、数码、充值</a>
 								</h3>
 								<div class="item-list clearfix">
 									<div class="subitem">
 										<dl class="fore" th:each="category2: ${category1.categoryChild}">
 											<dt>
-												<a th:href="@{http://localhost:8300/list.html?category2Id={category2Id}(category2Id=${category2.categoryId})}" th:text="${category2.categoryName}" target="_blank">充值</a>
+												<a th:href="@{http://list.gmall.com/list.html?category2Id={category2Id}(category2Id=${category2.categoryId})}" th:text="${category2.categoryName}" target="_blank">充值</a>
 											</dt>
 											<dd>
 												<em th:each="category3: ${category2.categoryChild}">
-													<a th:href="@{http://localhost:8300/list.html?category3Id={category3Id}(category3Id=${category3.categoryId})}" th:text="${category3.categoryName}" target="_blank">充值</a>
+													<a th:href="@{http://list.gmall.com/list.html?category3Id={category3Id}(category3Id=${category3.categoryId})}" th:text="${category3.categoryName}" target="_blank">充值</a>
 												</em>
 											</dd>
 										</dl>

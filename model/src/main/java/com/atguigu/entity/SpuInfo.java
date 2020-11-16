@@ -5,8 +5,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+
 import lombok.Data;
 
 import java.util.List;
@@ -18,27 +17,27 @@ import java.util.List;
  *
  */
 @Data
-@ApiModel(description = "SpuInfo")
+//@ApiModel(description = "SpuInfo")
 @TableName("spu_info")
 public class SpuInfo {
 	
 	private static final long serialVersionUID = 1L;
-	@ApiModelProperty(value = "id")
+	//@ApiModelProperty(value = "id")
 	@TableId(type = IdType.AUTO)
 	private Long id;
-	@ApiModelProperty(value = "商品名称")
+	//@ApiModelProperty(value = "商品名称")
 	@TableField("spu_name")
 	private String spuName;
 
-	@ApiModelProperty(value = "商品描述(后台简述）")
+	//@ApiModelProperty(value = "商品描述(后台简述）")
 	@TableField("description")
 	private String description;
 
-	@ApiModelProperty(value = "三级分类id")
+	//@ApiModelProperty(value = "三级分类id")
 	@TableField("category3_id")
 	private Long category3Id;
 
-	@ApiModelProperty(value = "品牌id")
+	//@ApiModelProperty(value = "品牌id")
 	@TableField("tm_id")
 	private Long tmId;
 

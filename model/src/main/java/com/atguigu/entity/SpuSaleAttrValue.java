@@ -5,8 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -23,25 +22,25 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("spu_sale_attr_value")
-@ApiModel(value="SpuSaleAttrValue对象", description="spu销售属性值")
+//@ApiModel(value="SpuSaleAttrValue对象", description="spu销售属性值")
 public class SpuSaleAttrValue implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "销售属性值编号")
+   // @ApiModelProperty(value = "销售属性值编号")
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @ApiModelProperty(value = "商品id")
+   // @ApiModelProperty(value = "商品id")
     private Long spuId;
 
-    @ApiModelProperty(value = "销售属性id")
+    //@ApiModelProperty(value = "销售属性id")
     private Long baseSaleAttrId;
 
-    @ApiModelProperty(value = "销售属性值名称")
+   // @ApiModelProperty(value = "销售属性值名称")
     private String saleAttrValueName;
 
-    @ApiModelProperty(value = "销售属性名称(冗余)")
+   // @ApiModelProperty(value = "销售属性名称(冗余)")
     private String saleAttrName;
 
     // 是否是默认选中状态

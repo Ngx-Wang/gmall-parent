@@ -9,6 +9,7 @@
         <module>web</module>
         <module>model</module>
         <module>service-client</module>
+        <module>server-gateway</module>
 
     </modules>
 
