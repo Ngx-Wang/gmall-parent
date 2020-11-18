@@ -6,10 +6,7 @@ import com.atguigu.response.result.Result;
 import com.atguigu.service.CartService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -43,6 +40,12 @@ public class CartApiController {
     }
 
 
+    @RequestMapping("/getCartByUserId/{userId}")
+    List<CartInfo> getCartByUserId(@PathVariable("userId") String userId){
 
+        List<CartInfo> cartInfos = new ArrayList<>();
+        cartInfos = cartService.cartList(userId);
+        return cartInfos;
+    }
 
 }

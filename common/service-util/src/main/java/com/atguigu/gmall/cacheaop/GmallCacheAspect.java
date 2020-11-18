@@ -1,6 +1,7 @@
 package com.atguigu.gmall.cacheaop;
 
 
+import com.atguigu.cart.CartInfo;
 import com.atguigu.entity.SkuInfo;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -11,7 +12,9 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -40,15 +43,18 @@ public class GmallCacheAspect {
                 }
 
                 if(null!=object){
-                    // 同步缓存
-                    redisTemplate.opsForValue().set(CacheKey, object);
+
+                    if(CacheKey.indexOf(":cart")==-1){
+                        // 同步缓存
+                        redisTemplate.opsForValue().set(CacheKey, object);
+                    }
                     String script = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
                     // 设置lua脚本返回的数据类型
                     DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>();
                     // 设置lua脚本返回类型为Long
                     redisScript.setResultType(Long.class);
                     redisScript.setScriptText(script);
-                    redisTemplate.execute(redisScript, Arrays.asList(CacheKey + ":lock"),lock);
+                    redisTemplate.execute(redisScript, Arrays.asList(CacheKey + ":lock"), lock);
 
                 }
             }else{
@@ -58,7 +64,7 @@ public class GmallCacheAspect {
                     e.printStackTrace();
                 }
 
-                return getCacheKey(point);
+                return getCacheHit(point);
             }
         }
         return object;
@@ -81,10 +87,12 @@ public class GmallCacheAspect {
         Gmall annotation = methodSignature.getMethod().getAnnotation(Gmall.class);
         String prefix = annotation.prefix();
         String CacheKey = prefix;
+
         Object[] args = point.getArgs();
         for (Object arg : args) {
             CacheKey= CacheKey + ":" + arg;
         }
+
         return CacheKey;
     }
 }

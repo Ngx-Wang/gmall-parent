@@ -62,7 +62,7 @@ public class CartServiceImpl implements CartService {
 
     }
 
-    //@Gmall(prefix ="cartList")
+    @Gmall(prefix ="cartList")
     @Override
     public List<CartInfo> cartList(String userId) {
 

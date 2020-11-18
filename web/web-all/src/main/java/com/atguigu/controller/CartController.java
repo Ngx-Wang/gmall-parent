@@ -28,7 +28,7 @@ public class CartController {
         return "redirect:http://cart.gmall.com/cart/success.html";
     }
 
-    @RequestMapping("cart/cart.html")
+    @RequestMapping({"cart.html","cart/cart.html"})
     public String cartList(){
         return "cart/index";
     }

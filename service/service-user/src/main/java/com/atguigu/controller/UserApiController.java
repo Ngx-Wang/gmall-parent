@@ -2,10 +2,12 @@ package com.atguigu.controller;
 
 import com.atguigu.response.result.Result;
 import com.atguigu.service.UserApiService;
+import com.atguigu.user.UserAddress;
 import com.atguigu.user.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -34,7 +36,13 @@ public class UserApiController {
         }
     }
 
+    @RequestMapping("/passport/getUserAddressList/{userId}")
+    List<UserAddress> getUserAddressList(@PathVariable("userId")String userId){
 
+        List<UserAddress> list = userApiService.getUserAddressList(userId);
+
+        return  list;
+    }
 
 
 

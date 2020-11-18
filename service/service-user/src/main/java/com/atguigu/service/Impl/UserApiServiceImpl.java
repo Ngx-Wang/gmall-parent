@@ -1,8 +1,10 @@
 package com.atguigu.service.Impl;
 
+import com.atguigu.mapper.UserAddressMapper;
 import com.atguigu.mapper.UserInfoMapper;
 import com.atguigu.response.result.Result;
 import com.atguigu.service.UserApiService;
+import com.atguigu.user.UserAddress;
 import com.atguigu.user.UserInfo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -24,6 +27,8 @@ public class UserApiServiceImpl implements UserApiService {
     @Autowired
     RedisTemplate redisTemplate;
 
+    @Autowired
+    UserAddressMapper userAddressMapper;
 
     @Override
     public UserInfo verify(String token) {
@@ -62,6 +67,14 @@ public class UserApiServiceImpl implements UserApiService {
         return  map;
 
 
+    }
+
+    @Override
+    public List<UserAddress> getUserAddressList(String userId) {
+        QueryWrapper<UserAddress> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id",userId);
+        List<UserAddress> list = userAddressMapper.selectList(queryWrapper);
+        return list;
     }
 
 

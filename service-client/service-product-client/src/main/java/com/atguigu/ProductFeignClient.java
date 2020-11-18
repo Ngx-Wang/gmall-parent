@@ -1,6 +1,7 @@
 package com.atguigu;
 
 import com.alibaba.fastjson.JSONObject;
+import com.atguigu.cart.CartInfo;
 import com.atguigu.entity.BaseCategoryView;
 import com.atguigu.entity.SkuImage;
 import com.atguigu.entity.SkuInfo;
@@ -44,4 +45,5 @@ public interface ProductFeignClient {
 
     @RequestMapping("/product/api/categoryList")
     List<JSONObject> categoryList();
+
 }
