@@ -6,6 +6,7 @@ import com.atguigu.list.*;
 import com.atguigu.repository.GoodsRepository;
 import com.atguigu.service.ListService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
@@ -13,6 +14,7 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.text.Text;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
+import org.elasticsearch.index.query.NestedQueryBuilder;
 import org.elasticsearch.index.query.TermQueryBuilder;
 
 import org.elasticsearch.search.SearchHit;
@@ -123,19 +125,24 @@ public class ListServiceImpl implements ListService {
 
         //属性（数组）
         //pop----->平台属性Id:平台属性值名称:平台属性名，
-        if (null != props && props.length>0){
-
+        if (null != props && props.length > 0) {
             for (String prop : props) {
                 String[] split = prop.split(":");
-               Long attrId= Long.parseLong(split[0]);
-                String attrValue=  split[1];
-                String attrName= split[2];
-                //根据id进行结果过滤
-                TermQueryBuilder queryBuilder = new TermQueryBuilder("attrId",attrId);
-                boolQueryBuilder.filter(queryBuilder);
-                //根据平台属性值进行筛选
-                MatchQueryBuilder matchQueryBuilder = new MatchQueryBuilder("attrValue", attrValue);
-                boolQueryBuilder.must(matchQueryBuilder);
+
+                Long attrId = Long.parseLong(split[0]);
+                String attrValueName = split[1];
+                String attrName = split[2];
+
+                BoolQueryBuilder boolQueryBuilderForNested = new BoolQueryBuilder();
+                // 属性id
+                TermQueryBuilder termQueryBuilder = new TermQueryBuilder("attrs.attrId", attrId);
+                boolQueryBuilderForNested.filter(termQueryBuilder);
+                // 属性值名称
+                MatchQueryBuilder matchQueryBuilder = new MatchQueryBuilder("attrs.attrValue", attrValueName);
+                boolQueryBuilderForNested.must(matchQueryBuilder);
+                NestedQueryBuilder nestedQueryBuilder = new NestedQueryBuilder("attrs",boolQueryBuilderForNested, ScoreMode.None);
+
+                boolQueryBuilder.filter(nestedQueryBuilder);
             }
         }
 
@@ -143,7 +150,7 @@ public class ListServiceImpl implements ListService {
         if (StringUtils.isNotEmpty(trademark)){
             String[] split = trademark.split(":");
             Long tmId = Long.parseLong(split[0]);
-            TermQueryBuilder queryBuilder = new TermQueryBuilder("tmName",tmId);
+            TermQueryBuilder queryBuilder = new TermQueryBuilder("tmId",tmId);
             boolQueryBuilder.filter(queryBuilder);
         }
 

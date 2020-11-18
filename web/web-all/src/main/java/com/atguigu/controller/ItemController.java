@@ -1,20 +1,15 @@
 package com.atguigu.controller;
 
+import com.atguigu.CartFeignClient;
 import com.atguigu.ItemFeignClient;
-import com.atguigu.entity.SpuSaleAttr;
-import com.atguigu.response.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 
 @Controller

@@ -114,7 +114,7 @@
 		methods: {
             submitLogin() {
                 login.login(this.user).then(response => {
-                    debugger
+                    //debugger
                     if (response.data.code == 200) {
                         //把token存在cookie中、也可以放在localStorage中
                         auth.setToken(response.data.data.token)

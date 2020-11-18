@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class gatewayController {
 
     @RequestMapping("login.html")
-    public String index( Model model){
+    public String index( Model model,String originUrl){
 
-
+        model.addAttribute("originUrl",originUrl);
 
 
 
