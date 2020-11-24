@@ -34,7 +34,6 @@ public class GmallCacheAspect {
         if (null==object) {
             String lock = UUID.randomUUID().toString();
             Boolean ifDb = redisTemplate.opsForValue().setIfAbsent(CacheKey+ ":lock", lock, 1, TimeUnit.SECONDS);
-
             if (ifDb) {
                 try {
                     object =point.proceed();
@@ -82,6 +81,7 @@ public class GmallCacheAspect {
         return object;
     }
 
+    //获得主键
     private String getCacheKey(ProceedingJoinPoint point) {
         MethodSignature methodSignature = (MethodSignature) point.getSignature();
         Gmall annotation = methodSignature.getMethod().getAnnotation(Gmall.class);

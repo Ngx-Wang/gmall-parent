@@ -2,6 +2,7 @@ package com.atguigu;
 
 
 import com.atguigu.order.OrderDetail;
+import com.atguigu.order.OrderInfo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,4 +17,7 @@ public interface OrderFeignClient {
 
     @RequestMapping("api/order/getDetailArrayList/{userId}")
     List<OrderDetail> getDetailArrayList(@PathVariable("userId") String userId);
+
+    @RequestMapping("api/order/getOrderInfoById/{orderId}")
+    OrderInfo getOrderInfoById(@PathVariable("orderId") Long orderId);
 }

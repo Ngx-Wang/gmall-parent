@@ -1,9 +1,9 @@
 package com.atguigu.mapper;
 
-import com.atguigu.order.OrderDetail;
+import com.atguigu.payment.PaymentInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface OrderMapper extends BaseMapper<OrderDetail> {
+public interface PaymentInfoMapper extends BaseMapper<PaymentInfo> {
 }

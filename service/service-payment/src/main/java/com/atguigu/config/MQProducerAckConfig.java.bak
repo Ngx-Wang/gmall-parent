@@ -1,0 +1,36 @@
+package com.atguigu.mq.config;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Component;
+
+@Component
+@Slf4j
+public class MQProducerAckConfig implements RabbitTemplate.ConfirmCallback,RabbitTemplate.ReturnCallback{
+    /**
+     * 如果消息在交换机上投递失败
+     * @param message
+     * @param i
+     * @param s
+     * @param s1
+     * @param s2
+     */
+    @Override
+    public void returnedMessage(Message message, int i, String s, String s1, String s2) {
+        System.out.println("消息是否成功投递");
+    }
+
+    /***
+     * 消息发送出去后(交换机)
+     * @param correlationData
+     * @param b
+     * @param errMessage
+     */
+    @Override
+    public void confirm(@Nullable CorrelationData correlationData, boolean b, @Nullable String errMessage) {
+        System.out.println("消息是否成功发送到交换机");
+    }
+}
