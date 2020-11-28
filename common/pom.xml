@@ -17,10 +17,7 @@
         <module>web-util</module>
         <module>rabbit-util</module>
     </modules>
-
-
     <dependencies>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

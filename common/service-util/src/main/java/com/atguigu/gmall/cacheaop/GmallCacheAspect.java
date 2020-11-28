@@ -33,14 +33,13 @@ public class GmallCacheAspect {
         object = redisTemplate.opsForValue().get(CacheKey);
         if (null==object) {
             String lock = UUID.randomUUID().toString();
-            Boolean ifDb = redisTemplate.opsForValue().setIfAbsent(CacheKey+ ":lock", lock, 1, TimeUnit.SECONDS);
+            Boolean ifDb = redisTemplate.opsForValue().setIfAbsent(CacheKey+ ":lock", lock, 2, TimeUnit.SECONDS);
             if (ifDb) {
                 try {
                     object =point.proceed();
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
                 }
-
                 if(null!=object){
 
                     if(CacheKey.indexOf(":cart")==-1){

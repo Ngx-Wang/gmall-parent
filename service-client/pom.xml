@@ -18,6 +18,7 @@
         <module>service-user-client</module>
         <module>service-cart-client</module>
         <module>service-order-client</module>
+        <module>service-seckill-client</module>
     </modules>
 
     <dependencies>

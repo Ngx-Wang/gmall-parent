@@ -47,7 +47,7 @@ public class SpuInfoController {
 
         return Result.ok(spuImages);
     }
-    //分页查询
+    //图片上传到fastDFS中，并返回图片路径，用于回显
     @RequestMapping("/fileUpload")
     public Result fileUpload(@RequestParam("file")MultipartFile multipartFile){
         StringBuffer url = new StringBuffer("http://192.168.200.128:8080");

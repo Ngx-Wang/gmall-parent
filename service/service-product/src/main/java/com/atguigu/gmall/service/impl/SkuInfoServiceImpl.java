@@ -49,7 +49,7 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo> impl
     public IPage<SkuInfo> getSpuInfoList(String page, String limit) {
         long page1 = Long.parseLong(page);
         long limit1 = Long.parseLong(limit);
-        IPage<SkuInfo> infoPage = new Page<>(page1,limit1);
+        IPage<SkuInfo> infoPage = new Page<>(page1, limit1);
         IPage<SkuInfo> skuInfoIPage = baseMapper.selectPage(infoPage, null);
         return skuInfoIPage;
 
@@ -59,12 +59,12 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo> impl
     @Override
     public List<SpuSaleAttr> spuSaleAttrList(Long spuId) {
         QueryWrapper<SpuSaleAttr> wrapper = new QueryWrapper<>();
-        wrapper.eq("spu_id",spuId);
+        wrapper.eq("spu_id", spuId);
         List<SpuSaleAttr> saleAttrList = spuSaleAttrMapper.selectList(wrapper);
         for (SpuSaleAttr spuSaleAttr : saleAttrList) {
             QueryWrapper<SpuSaleAttrValue> queryWrapper1 = new QueryWrapper<>();
-            queryWrapper1.eq("spu_id",spuId);
-            queryWrapper1.eq("base_sale_attr_id",spuSaleAttr.getBaseSaleAttrId());
+            queryWrapper1.eq("spu_id", spuId);
+            queryWrapper1.eq("base_sale_attr_id", spuSaleAttr.getBaseSaleAttrId());
             List<SpuSaleAttrValue> spuSaleAttrValues = spuSaleAttrValueMapper.selectList(queryWrapper1);
             spuSaleAttr.setSpuSaleAttrValueList(spuSaleAttrValues);
         }
@@ -126,7 +126,7 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo> impl
 
     @Gmall
     @Override
-    public SkuInfo getSkuInfoById(Long skuId)  {
+    public SkuInfo getSkuInfoById(Long skuId) {
         SkuInfo skuInfo = new SkuInfo();
         skuInfo = baseMapper.selectById(skuId);
         return skuInfo;
@@ -138,15 +138,17 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo> impl
         return skuInfo.getPrice();
 
     }
+
     @Gmall(prefix = "images")
     @Override
     public List<SkuImage> getImage(Long skuId) {
         QueryWrapper<SkuImage> wrapper = new QueryWrapper<>();
-        wrapper.eq("sku_id",skuId);
+        wrapper.eq("sku_id", skuId);
         List<SkuImage> list = skuImageMapper.selectList(wrapper);
         return list;
 
     }
+
     @Gmall(prefix = "SkuSearAttrValue")
     @Override
     public List<Map<String, Object>> getSkuSearAttrValue(Long spuId) {
@@ -160,7 +162,7 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo> impl
         SkuInfo skuInfo = baseMapper.selectById(skuId);
         BaseTrademark baseTrademark = baseTrademarkMapper.selectById(skuInfo.getTmId());
         QueryWrapper<BaseCategoryView> baseCategoryViewWrapper = new QueryWrapper<>();
-        baseCategoryViewWrapper.eq("category3_id",skuInfo.getCategory3Id());
+        baseCategoryViewWrapper.eq("category3_id", skuInfo.getCategory3Id());
         BaseCategoryView baseCategoryView = baseCategoryViewMapper.selectOne(baseCategoryViewWrapper);
         goods.setTitle(skuInfo.getSkuName());
         goods.setId(skuId);

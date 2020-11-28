@@ -1,5 +1,6 @@
 package com.atguigu.service.Impl;
 
+import com.alibaba.fastjson.JSON;
 import com.atguigu.CartFeignClient;
 import com.atguigu.ProductFeignClient;
 import com.atguigu.cart.CartInfo;
@@ -7,9 +8,14 @@ import com.atguigu.enums.OrderStatus;
 import com.atguigu.enums.ProcessStatus;
 import com.atguigu.mapper.OrderInfoMapper;
 import com.atguigu.mapper.OrderDetailMapper;
+import com.atguigu.mq.constant.MqConst;
+import com.atguigu.mq.service.RabbitService;
 import com.atguigu.order.OrderDetail;
 import com.atguigu.order.OrderInfo;
 import com.atguigu.service.OrderApiService;
+import com.atguigu.ware.PaymentWay;
+import com.atguigu.ware.WareOrderTask;
+import com.atguigu.ware.WareOrderTaskDetail;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -44,6 +50,8 @@ public class OrderApiServiceImpl implements OrderApiService {
         return tradeNo;
     }
 
+    @Autowired
+    RabbitService rabbitService;
 
     //订单列表详情
     @Override
@@ -134,7 +142,31 @@ public class OrderApiServiceImpl implements OrderApiService {
         QueryWrapper<OrderInfo> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("out_trade_no",(String)map.get("out_trade_no"));
 
+        OrderInfo orderInfodb = orderInfoMapper.selectOne(queryWrapper);
+        OrderInfo orderInfoById = getOrderInfoById(orderInfodb.getId());
 
+
+        //发送消息，说明订单y已支付完成
+        WareOrderTask wareOrderTask = new WareOrderTask();
+        List<WareOrderTaskDetail> orderTaskDetails = new ArrayList<>();
+        List<OrderDetail> orderDetailList = orderInfoById.getOrderDetailList();
+        for (OrderDetail orderDetail : orderDetailList) {
+            WareOrderTaskDetail wareOrderTaskDetail = new WareOrderTaskDetail();
+            wareOrderTaskDetail.setSkuId(orderDetail.getSkuId()+"");
+            wareOrderTaskDetail.setSkuNum(orderDetail.getSkuNum());
+            wareOrderTaskDetail.setSkuName(orderDetail.getSkuName());
+            orderTaskDetails.add(wareOrderTaskDetail);
+        }
+
+        wareOrderTask.setDetails(orderTaskDetails);
+        wareOrderTask.setOrderId(orderInfoById.getId()+"");
+        wareOrderTask.setConsignee(orderInfoById.getConsignee());
+        wareOrderTask.setConsigneeTel(orderInfoById.getConsigneeTel());
+        wareOrderTask.setCreateTime(new Date());
+        wareOrderTask.setPaymentWay(PaymentWay.ONLINE.getComment());
+        wareOrderTask.setDeliveryAddress(orderInfoById.getDeliveryAddress());
+        // 发送订单支付完成的队列
+        rabbitService.sendMessage(MqConst.EXCHANGE_DIRECT_WARE_STOCK,MqConst.ROUTING_WARE_STOCK, JSON.toJSONString(wareOrderTask));
         orderInfoMapper.update(orderInfo,queryWrapper);
     }
 

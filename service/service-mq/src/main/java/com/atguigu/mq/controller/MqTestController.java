@@ -1,6 +1,7 @@
 package com.atguigu.mq.controller;
 
 
+import com.atguigu.mq.seckill.CacheHelper;
 import com.atguigu.mq.service.RabbitService;
 import com.atguigu.response.result.Result;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -40,6 +41,12 @@ public class MqTestController {
         //rabbitService.sendMessage("test.exchange","test.routingKey","1");
         rabbitTemplate.convertAndSend("test.exchange1","test1.routingKey","111");
         return Result.ok();
+    }
+
+    @RequestMapping("testHelper")
+    public Result testHelper(){
+        Object o = CacheHelper.get("16");
+        return Result.ok(o);
     }
 
 }
